@@ -26,6 +26,9 @@ package org.kohsuke.github;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.infradna.tool.bridge_method_injector.WithBridgeMethods;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.rmi.UnexpectedException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.FileNotFoundException;
@@ -1148,7 +1151,7 @@ public class GHRepository extends GHObject {
     }
 
     public GHLabel getLabel(String name) throws IOException {
-        return root.retrieve().to(getApiTailUrl("labels/"+name), GHLabel.class).wrapUp(this);
+        return root.retrieve().to(getApiTailUrl("labels/"+encode(name)), GHLabel.class).wrapUp(this);
     }
 
     public GHLabel createLabel(String name, String color) throws IOException {
@@ -1635,5 +1638,13 @@ public class GHRepository extends GHObject {
     String getApiTailUrl(String tail) {
         if (tail.length()>0 && !tail.startsWith("/"))    tail='/'+tail;
         return "/repos/" + getOwnerName() + "/" + name +tail;
+    }
+
+    String encode(String input) {
+        try {
+            return URLEncoder.encode(input, "UTF8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException("The charset is hardcoded, so this exception should never be thrown", e);
+        }
     }
 }
