@@ -1641,10 +1641,7 @@ public class GHRepository extends GHObject {
     }
 
     String encode(String input) {
-        try {
-            return URLEncoder.encode(input, "UTF8");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException("The charset is hardcoded, so this exception should never be thrown", e);
-        }
+        // full URLEncode.encode() doesn't work, because of the emojis
+        return input.replace("?", "%3F");
     }
 }
