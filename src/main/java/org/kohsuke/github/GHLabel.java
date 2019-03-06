@@ -53,4 +53,23 @@ public class GHLabel {
         }
         return r;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        GHLabel ghLabel = (GHLabel) o;
+
+        return url.equals(ghLabel.url);
+    }
+
+    @Override
+    public int hashCode() {
+        return url.hashCode();
+    }
 }
