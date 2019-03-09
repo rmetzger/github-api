@@ -72,4 +72,11 @@ public class GHLabel {
     public int hashCode() {
         return url.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return "GHLabel{" +
+            "name='" + name + '\'' +
+            '}';
+    }
 }
