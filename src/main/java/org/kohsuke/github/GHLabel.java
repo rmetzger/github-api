@@ -55,17 +55,22 @@ public class GHLabel {
     }
 
     @Override
+    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings(
+        value="EQ_GETCLASS_AND_CLASS_CONSTANT",
+        justification="I know what I'm doing")
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+
+        if  (   (getClass() == GHIssue.Label.class || getClass() == GHLabel.class ) &&
+                (o.getClass() == GHIssue.Label.class || o.getClass() == GHLabel.class )
+            ) {
+            GHLabel ghLabel = (GHLabel) o;
+            return url.equals(ghLabel.url);
+        } else {
             return false;
         }
-
-        GHLabel ghLabel = (GHLabel) o;
-
-        return url.equals(ghLabel.url);
     }
 
     @Override
