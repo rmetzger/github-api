@@ -1644,6 +1644,8 @@ public class GHRepository extends GHObject {
         // full URLEncode.encode() doesn't work, because of the emojis
         return input.replace("?", "%3F")
             .replace("<", "%3C")
-            .replace(">","%3E");
+            .replace(">","%3E")
+            .replace("(","%28")
+            .replaceAll(",","%2C");
     }
 }
