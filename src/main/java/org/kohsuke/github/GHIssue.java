@@ -29,6 +29,7 @@ import static org.kohsuke.github.Previews.SQUIRREL_GIRL;
 import com.infradna.tool.bridge_method_injector.WithBridgeMethods;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,7 +77,7 @@ public class GHIssue extends GHObject implements Reactable{
     /**
      * @deprecated use {@link GHLabel}
      */
-    public static class Label extends GHLabel {
+    public static class Label extends GHLabel implements Serializable {
     }
     
     /*package*/ GHIssue wrap(GHRepository owner) {

@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class GHLabel {
     private String url, name, color;
-    private GHRepository repo;
+    private transient GHRepository repo;
 
     public String getUrl() {
         return url;
